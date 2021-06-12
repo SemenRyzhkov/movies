@@ -1,15 +1,19 @@
 <template>
   <div id="app">
-   <b-button>Button</b-button>
+    <b-button>Button</b-button>
   </div>
 </template>
 
 <script>
-
+import { mapActions } from 'vuex';
 export default {
-  name: "App",
-  components: {
-
+  name: 'App',
+  components: {},
+  mounted() {
+    this.fetchMovies();
+  },
+  methods: {
+    ...mapActions('movies', ['fetchMovies']),
   },
 };
 </script>
