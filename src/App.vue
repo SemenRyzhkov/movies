@@ -1,19 +1,32 @@
 <template>
   <div id="app">
-    <b-button>Button</b-button>
+    <PosterBG :poster="posterBG" />
+    <MoviesList :list="moviesList" @changePoster="onChangePoster" />
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
+import MoviesList from '@/components/MoviesList';
+import PosterBG from '@/components/PosterBG';
+
 export default {
   name: 'App',
-  components: {},
-  mounted() {
-    this.fetchMovies();
+  components: {
+    MoviesList,
+    PosterBG,
+  },
+  data: () => ({
+    posterBG: '',
+  }),
+  computed: {
+    ...mapGetters('movies', ['moviesList']),
   },
   methods: {
     ...mapActions('movies', ['fetchMovies']),
+    onChangePoster(poster) {
+      this.posterBG = poster;
+    },
   },
 };
 </script>
@@ -23,8 +36,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  position: relative;
 }
 </style>
