@@ -2,7 +2,7 @@ import axios from '@/plugins/axios';
 import IDs from '@/store/mock/top250';
 import mutations from '@/store/mutations';
 
-const { MOVIES } = mutations;
+const { MOVIES, CURRENT_PAGE } = mutations;
 
 function serializeResponse(movies) {
   return movies.reduce((acc, movie) => {
@@ -27,10 +27,14 @@ const moviesStore = {
         top250IDs.slice(from, to),
     currentPage: ({ currentPage }) => currentPage,
     moviesPerPage: ({ moviesPerPage }) => moviesPerPage,
+    moviesLength: ({ top250IDs }) => Object.keys(top250IDs).length,
   },
   mutations: {
     [MOVIES](state, value) {
       state.movies = value;
+    },
+    [CURRENT_PAGE](state, value) {
+      state.currentPage = value;
     },
   },
   actions: {
@@ -54,6 +58,10 @@ const moviesStore = {
       } catch (error) {
         console.log(error);
       }
+    },
+    changeCurrentPage({ commit, dispatch }, page) {
+      commit(CURRENT_PAGE, page);
+      dispatch('fetchMovies');
     },
   },
 };
