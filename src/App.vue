@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <Loader/>
+    <Loader />
     <PosterBG :poster="posterBG" />
+    <Header />
     <MoviesList :list="moviesList" @changePoster="onChangePoster" />
     <MoviesPagination
       :current-page="currentPage"
@@ -18,7 +19,7 @@ import MoviesList from '@/components/MoviesList';
 import PosterBG from '@/components/PosterBG';
 import MoviesPagination from '@/components/MoviesPagination';
 import Loader from '@/components/Loader';
-
+import Header from '@/components/Header';
 
 export default {
   name: 'App',
@@ -26,7 +27,8 @@ export default {
     MoviesList,
     PosterBG,
     MoviesPagination,
-    Loader
+    Loader,
+    Header,
   },
   data: () => ({
     posterBG: '',
